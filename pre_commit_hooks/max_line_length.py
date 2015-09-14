@@ -35,6 +35,7 @@ def lines_too_long(filename, length):
     return False
 
 def main(argv=None):
+    rv = 0
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='filenames to check')
     parser.add_argument('--len', dest='length', default=120, type=int, help='max line length')
@@ -46,7 +47,8 @@ def main(argv=None):
         lines = lines_too_long(file, args.length)
         if lines:
             print('Line {1} too long: {0}'.format(file, ",".join(lines)))
-    return 0
+            rv = 1
+    return rv
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
