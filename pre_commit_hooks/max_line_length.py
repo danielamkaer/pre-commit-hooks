@@ -1,5 +1,6 @@
 from __future__ import print_function
 import argparse, fileinput, sys
+import string
 
 KNOWN_BINARY_FILE_EXT = ['.pdf']
 ALLOWED_NON_PRINTABLE_THRESHOLD = 0.15
