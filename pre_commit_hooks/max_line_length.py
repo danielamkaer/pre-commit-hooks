@@ -21,10 +21,17 @@ def is_text(stuff):
     return len(non_printable_chars) / len(stuff) < ALLOWED_NON_PRINTABLE_THRESHOLD
 
 def lines_too_long(filename, length):
+    too_long = [] 
+    i = 1
     for line in fileinput.input([filename]):
         if len(line) > length:
-            fileinput.close()
-            return True
+            too_long.append(str(i))
+
+        i += 1
+
+    fileinput.close()
+    if len(too_long) > 0:
+        return too_long
     return False
 
 def main(argv=None):
@@ -33,10 +40,10 @@ def main(argv=None):
     parser.add_argument('--len', dest='length', default=120, type=int, help='max line length')
     args = parser.parse_args(argv)
     text_files = [f for f in args.filenames if is_textfile(f)]
-    files_with_too_long_lines = [f for f in text_files if lines_too_long(f, args.length)]
-    for file in files_with_too_long_lines:
-        print('File has lines that are too long: {0}'.format(file))
-        return 1
+    for file in text_files:
+        lines = lines_too_long(file, args.length)
+        if lines:
+            print('Line {1} too long: {0}'.format(file, ",".join(lines)))
     return 0
 
 if __name__ == '__main__':
