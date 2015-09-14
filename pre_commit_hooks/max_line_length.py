@@ -39,12 +39,14 @@ def main(argv=None):
     parser.add_argument('filenames', nargs='*', help='filenames to check')
     parser.add_argument('--len', dest='length', default=120, type=int, help='max line length')
     args = parser.parse_args(argv)
+    print(args)
     text_files = [f for f in args.filenames if is_textfile(f)]
     for file in text_files:
+        print("Checking {0}".format(file))
         lines = lines_too_long(file, args.length)
         if lines:
             print('Line {1} too long: {0}'.format(file, ",".join(lines)))
     return 0
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv))
+    sys.exit(main(sys.argv[1:]))
