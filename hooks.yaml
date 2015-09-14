@@ -1,6 +1,6 @@
--	id: max_line_length
-	name: Enforces a maximum line length
-	description: "Prevents files with too long lines from being committed"
-	entry: max_line_length
-	language: python
-	files: ''
+-   id: max_line_length
+    name: Enforces a maximum line length
+    description: "Prevents files with too long lines from being committed"
+    entry: max_line_length
+    language: python
+    files: ''
